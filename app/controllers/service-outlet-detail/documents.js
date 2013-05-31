@@ -118,7 +118,7 @@ function captureDocument(evt, _callback) {
 }
 
 function openDetail(e) {
-	var docDetail = Alloy.createController("/service-outlet-detail/documentDetail", {
+	var docDetail = Alloy.createController("service-outlet-detail/documentDetail", {
 		data: _data[e.index],
 		aid: _args.data.outlet.aid
 	});
@@ -187,7 +187,7 @@ function openDetail(e) {
 }
 
 function addDocument(newData) {
-	var docDetail = Alloy.createController("/service-outlet-detail/documentDetail", {
+	var docDetail = Alloy.createController("service-outlet-detail/documentDetail", {
 		data: newData,
 		aid: _args.data.outlet.aid
 	});

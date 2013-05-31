@@ -17,7 +17,7 @@ outletData = _args.data.outlet.outlet,
 	};
 
 if(OS_IOS) {
-	var map = Alloy.createController("/common/mapView", mapData).getView(),
+	var map = Alloy.createController("common/mapView", mapData).getView(),
 		zoomBtn = Ti.UI.createButton({
 			backgroundImage: "/service-outlet-detail/map-zoom-btn.png",
 			backgroundSelectedImage: "/service-outlet-detail/map-zoom-btn-touch.png",
@@ -35,7 +35,7 @@ if(OS_IOS) {
 } else {
 	mapData.container = $.outletMap;
 	if(!Alloy.Globals.Map) {
-		Alloy.Globals.Map = Alloy.createController("/common/mapView", mapData);
+		Alloy.Globals.Map = Alloy.createController("common/mapView", mapData);
 	} else {
 		Alloy.Globals.Map.show(mapData);
 	}

@@ -1,9 +1,13 @@
 var Cloud = require('ti.cloud');
-var animation = require('alloy/animation');
+//var animation = require('alloy/animation');
 
 var settings = {
 	loginCallback: null,
  	createCallback: null
+}
+
+$.loginClick = function() {
+  loginClick();
 }
 //Create activity indicator for buttons
 function activityIndicator(){
@@ -31,8 +35,8 @@ function loginClick() {
     $.loginBtn.add(actInd);
     actInd.show();
     Cloud.Users.login({
-        login : $.usernameTxt.value || "field_service_rep",
-        password : $.passwordTxt.value || "Titanium123!"
+        login : $.usernameTxt.value || Alloy.CFG.defaults.username || null,
+        password : $.passwordTxt.value || Alloy.CFG.defaults.password || null
     }, function(e) {
         if(e.success == 1){
             var user = e.users[0];
@@ -43,38 +47,10 @@ function loginClick() {
             $.loginBtn.remove(actInd);
             actInd = null;
             $.msgLbl.text = e.message;
-            var alertDialog = Ti.UI.createAlertDialog({
-                title:"Login Failure",
-                message:"Would you like to generate a demo user?",
-                buttonNames:["Yes","No"]
-            });
-            alertDialog.show();
-            alertDialog.addEventListener("click", function(evt){
-                if(evt.index == 0){
-                    createUser();
-                }
-            });
-            
+            settings.loginCallback();  
         }
         
     });
-}
-
-function createUser(){
-	var setup = require("/data/setup");
-	setup.createUser();
-    // Cloud.Users.create({
-        // username:"field_service_rep",
-        // password:"Titanium123!",
-        // password_confirmation: "Titanium123!",
-        // photo:"/themes/appc-red/assets/iphone/top-nav/appc-logo.png"
-    // }, function(evt){
-        // if(evt.success ==1){
-            // alert("A demo user was created.\n\nusername:field_service_rep\npassword:Titanium123!\n\nThis data is hard coded so you can login with blank fields.");
-        // } else {
-            // alert(evt.message);
-        // }
-    // });
 }
 
 function forgotClick(e) {
@@ -183,9 +159,7 @@ function blurStyle(evt){
 function focusPassword(){
     $.passwordTxt.focus();
 }
-exports.init = function(params) {
-	settings.loginCallback = params.loginCallback;
-}
+
 Ti.App.addEventListener("keyboardframechanged",moveLoginContainer);
 
 function moveLoginContainer(evt){
@@ -209,20 +183,36 @@ function moveLoginContainer(evt){
 	}
 }
 
-setTimeout(function() {
-		// timeout only to delay initial animation (fake start)
-		$.loginContainer.animate({
-			height: 361, 
-			duration: 250
-		}, function() {
-			$.acsLogin.animate({ opacity:1.0, duration:250 });
-			$.divider.animate({ opacity:1.0, duration: 250 });
-			$.loginContainer.height = 361;
-		});
-}, 1000);
+$.init = function(params) {
+	settings.loginCallback = params.loginCallback;
+}
+
+$.open = function(){
+	if(OS_IOS){
+		setTimeout(function() {
+				// timeout only to delay initial animation (fake start)
+				$.loginContainer.animate({
+					height: 361, 
+					duration: 250
+				}, function() {
+					$.acsLogin.animate({ opacity:1.0, duration:250 });
+					$.divider.animate({ opacity:1.0, duration: 250 });
+					$.loginContainer.height = 361;
+				});
+		}, 1000);
+	} else {
+		$.loginContainer.height  = 361; 
+		$.acsLogin.opacity = 1.0;
+		$.divider.opacity =1.0;
+	}
+}
+
 
 $.close = function(){
 	
 	Ti.App.removeEventListener("keyboardframechanged",moveLoginContainer);
-	$.destroy()
+	$.destroy();
+	Alloy.CFG.skipLogin = false;
 }
+
+$.open();

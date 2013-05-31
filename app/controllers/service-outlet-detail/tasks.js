@@ -29,7 +29,7 @@ function buildTasks() {
 	activeRow = [];
 	rows = [];
 	for(var i in _data.tasks) {
-		var row = Alloy.createController("/service-outlet-detail/taskRow", {
+		var row = Alloy.createController("service-outlet-detail/taskRow", {
 			data: _data.tasks[i],
 			realIndex: i
 		}).getView();
@@ -66,7 +66,7 @@ function rowClick(e) {
 			});
 		}
 	} else {
-		var taskDetail = Alloy.createController("/service-outlet-detail/taskDetail", {
+		var taskDetail = Alloy.createController("service-outlet-detail/taskDetail", {
 			data: _data,
 			index: e.source.realIndex,
 			existing: true
@@ -92,6 +92,7 @@ function rowClick(e) {
 				type: "Back",
 				title: "Tasks",
 				event: function() {
+					closeDetail();
 					taskDetail.updateTask(function(_isTaskUpdated, _updatedTask) {
 						if(_isTaskUpdated) {
 							_args.data.tasks[e.source.realIndex] = _updatedTask;
@@ -102,7 +103,6 @@ function rowClick(e) {
 								message: "Error saving the task"
 							}).show();
 						}
-						closeDetail();
 					});
 				}
 			}
@@ -136,7 +136,7 @@ function rowClick(e) {
 
 function addTask(data) {
 	Alloy.Globals.DetailsView.getView("detailScroll").scrollToView(1);
-	var taskDetail = Alloy.createController("/service-outlet-detail/taskDetail", {
+	var taskDetail = Alloy.createController("service-outlet-detail/taskDetail", {
 		data: _data || data,
 		existing: false
 	});

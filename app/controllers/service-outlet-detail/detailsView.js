@@ -61,11 +61,11 @@ function populateDetails(results, _callback) {
 	$.btnContact.oid = data.outlet.outlet.oid;
 	$.btnLocation.oid = data.outlet.outlet.oid;
 
-	var documents = Alloy.createController("/service-outlet-detail/documents", {
+	var documents = Alloy.createController("service-outlet-detail/documents", {
 		data: data,
 		header: $.header
 	});
-	var tasks = Alloy.createController("/service-outlet-detail/tasks", {
+	var tasks = Alloy.createController("service-outlet-detail/tasks", {
 		data: data,
 		header: $.header
 	});
@@ -74,7 +74,7 @@ function populateDetails(results, _callback) {
 	$.topNav.btnAdd.addEventListener("click", tasks.addTask);
 
 	controllers = [
-		Alloy.createController("/service-outlet-detail/summary", {
+		Alloy.createController("service-outlet-detail/summary", {
 		data: data,
 		parent: $.detailScroll,
 		header: $.header,
@@ -84,17 +84,18 @@ function populateDetails(results, _callback) {
 		}
 	}),
 		tasks,
-		Alloy.createController("/service-outlet-detail/products", {
+		Alloy.createController("service-outlet-detail/products", {
 		data: data,
 		header: $.header
 	}),
-		Alloy.createController("/service-outlet-detail/expenses", {
+		Alloy.createController("service-outlet-detail/expenses", {
 		data: data,
 		header: $.header
 	}),
 		documents,
-		Alloy.createController("/service-outlet-detail/confirmations", {
-		data: data
+		Alloy.createController("service-outlet-detail/confirmations", {
+		data: data,
+		header: $.header
 	})
 	];
 
@@ -158,7 +159,7 @@ function showDetailMenu(e) {
 			if(e.index != $.detailScroll.getCurrentPage()) {
 				$.detailScroll.setCurrentPage(e.index);
 				updateHeader(controllers[e.index].getHeader());
-
+				removeMenu();
 			} else {
 				removeMenu();
 			}

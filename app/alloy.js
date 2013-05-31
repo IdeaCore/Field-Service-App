@@ -18,11 +18,6 @@ var APP = {
 	 */
 	MainWindow: null,
 	/**
-	 * Navigation Widget using for routing controllers
-	 * @type {Object}
-	 */
-	Navigation: {},
-	/**
 	 * Initialize the application
 	 * NOTE: This should only be fired in index controller file and only once.
 	 * @type {Function}
@@ -34,53 +29,6 @@ var APP = {
 		Ti.App.addEventListener('pause', _.bind(this.exit, this));
 		Ti.App.addEventListener('close', _.bind(this.exit, this));
 		Ti.App.addEventListener('resume', _.bind(this.resume, this));
-
-		//  Initializing Navigational Widget
-		this.Navigation.init({
-			leftMenuController: 'leftMenu',
-			rightMenuController: 'rightMenu',
-		});
-	},
-	/**
-	 * Loads in the appropriate controller and config data
-	 */
-	loadContent: function() {
-		this.log('debug', 'APP.loadContent');
-
-		var contentFile = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, 'app.json');
-
-		if (!contentFile.exists()) {
-			contentFile = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory + 'data/app.json');
-		}
-
-		var content = contentFile.read();
-		var data;
-
-		try {
-			data = JSON.parse(content.text);
-		} catch(_error) {
-			this.log('error', 'Unable to parse downloaded JSON, reverting to packaged JSON');
-
-			contentFile = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory + "data/app.json");
-			content = contentFile.read();
-			data = JSON.parse(content.text);
-		}
-
-		this.ID = data.id;
-		this.VERSION = data.VERSION;
-		this.LEGAL = {
-			COPYRIGHT: data.legal.copyright,
-			TOS: data.legal.terms,
-			PRIVACY: data.legal.privacy,
-		};
-		this.ConfigurationURI = data.configurationURI && data.configurationUri.length > 10 ? data.configurationUri : false;
-		this.Settings = data.settings;
-	},
-	/**
-	 * Registers the app for push notifications
-	 */
-	registerPush: function() {
-		this.log('debug', 'APP.registerPush');
 	},
 	/**
 	 * Global network event handler
@@ -134,7 +82,7 @@ var APP = {
 	}
 };
 
-Alloy.Globals.formatDate = function(date){
+Alloy.Globals.formatDate = function(date) {
 	var moment = require("alloy/moment");
 	return moment(date).format("MM-DD-YYYY");
 }

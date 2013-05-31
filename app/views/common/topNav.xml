@@ -1,7 +1,7 @@
 <Alloy>
 	<View id="wrapper">
 		<View id="typeHome" class="typeView">
-			<View id="appcLogo" />
+			<View id="appcLogo" onClick="openDashboard"/>
 			<Label id="lblTitle" class="label_title">My Service Outlets</Label>
 			<View id="rightView" class="view_right">
 				<View id="profile" onClick="profileClick">

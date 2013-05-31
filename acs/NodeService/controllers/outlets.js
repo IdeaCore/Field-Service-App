@@ -10,49 +10,49 @@ var UTIL = require("../lib/utils");
 
 var adapter_url = "../adapters/{adapter}/outlets";
 
-function callAdapter(func, req, res) {
+function callAdapter(func, req, res){
 	// Determine what API we are using? ACS OR SALESFORCE
-	ACS.KeyValues.get({
-		name: "API"
-	}, function(e) {
-		if (e.success) {
+	ACS.KeyValues.get({name:"API"}, function(e){
+		if(e.success) {
 			var adapterUrl = adapter_url.replace("{adapter}", e.keyvalues[0].value.toLowerCase());
 			var API = require(adapterUrl);
 			API && API[func](req, res);
-		} else {
+		}
+		else {
 			res.write("{success: false, error: 'FAILURE GETTING API'}");
 			res.end();
 		}
 	})
 }
 
+
 // CRUD Functions 
 
 // GET
-function get(req, res) {
+function get(req, res){
 	var func = arguments.callee.name;
 	callAdapter(func, req, res);
 };
 
 // POST
-function create(req, res) {
+function create(req, res){
 	var func = arguments.callee.name;
 	callAdapter(func, req, res);
 };
 
 // PUT
-function update(req, res) {
+function update(req, res){
 	var func = arguments.callee.name;
 	callAdapter(func, req, res);
 };
 
 // DELETE
-function del(req, res) {
+function del(req, res){
 	var func = arguments.callee.name;
 	callAdapter(func, req, res);
 };
 
 //Custom Functions
-function getdetail(req, res) {
+function getdetail(req,res){
 	callAdapter('getdetail', req, res);
 }

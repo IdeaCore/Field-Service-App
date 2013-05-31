@@ -11,7 +11,7 @@ Animation = require("alloy/animation"),
 	};
 
 //Set module log level to 'info' for easier debuging
-//api.setLogLevel('info');
+api.setLogLevel('info');
 
 //Get remote assignments on load of controller
 getAssignments({
@@ -185,9 +185,9 @@ function createOutlets(results, type) {
 
 				//Create assignment placard
 				if(Alloy.CFG.theme == "appc-red") {
-					outlets.placards[i] = Alloy.createController("/my-service-outlets/placard", results.data[i]);
+					outlets.placards[i] = Alloy.createController("my-service-outlets/placard", results.data[i]);
 				} else if(Alloy.CFG.theme == "appc-blue") {
-					outlets.placards[i] = Alloy.createController("/my-service-outlets/activeOutlet", results.data[i].outlet);
+					outlets.placards[i] = Alloy.createController("my-service-outlets/activeOutlet", results.data[i].outlet);
 				}
 
 				//Add placard to the scrollView
@@ -200,7 +200,7 @@ function createOutlets(results, type) {
 				}
 			}
 			//Create the assignment map annotation
-			outlets.annotations[i] = Alloy.createController("/common/mapAnnotation", results.data[i].outlet).getView();
+			outlets.annotations[i] = Alloy.createController("common/mapAnnotation", results.data[i].outlet).getView();
 
 			//Save the assignment to the assignments model if it is not just a filter or sort function
 			// if(!type || type != "update"){
@@ -354,7 +354,7 @@ function openDetails(e, navData) {
 			console.log("openDetails");
 			showLoading("  Loading Outlet Details...");
 
-			Alloy.Globals.DetailsView = Alloy.createController("/service-outlet-detail/detailsView", {
+			Alloy.Globals.DetailsView = Alloy.createController("service-outlet-detail/detailsView", {
 				source: _data,
 				callback: closeDetails,
 				navData: navData || null
@@ -448,7 +448,7 @@ function openMap(params) {
 		};
 
 		if(!Alloy.Globals.Map) {
-			Alloy.Globals.Map = Alloy.createController("/common/mapView", mapData);
+			Alloy.Globals.Map = Alloy.createController("common/mapView", mapData);
 		} else {
 			Alloy.Globals.Map.show(mapData);
 		}
@@ -511,7 +511,7 @@ function showStatusPopOver(e) {
 			popoverArgs.arrowPosition = "bottom";
 			popoverArgs.containerLayout.top = convertedPoint.y - 260;
 		}
-		var popover = Alloy.createController("/common/popover", popoverArgs);
+		var popover = Alloy.createController("common/popover", popoverArgs);
 	} else if(OS_ANDROID) {
 		var opts = {
 			options: ["Active", "On Hold", "Inactive", "Complete"],
@@ -519,7 +519,7 @@ function showStatusPopOver(e) {
 			callbackArray: [activeClick, holdClick, inactiveClick, completeClick],
 			source: e.source
 		};
-		Alloy.createController("/common/optionDialog", opts);
+		Alloy.createController("common/optionDialog", opts);
 	}
 }
 
@@ -562,7 +562,7 @@ function showContactPopOver(e) {
 				popoverArgs.containerLayout.left = convertedPoint.x - 40;
 			}
 		}
-		var popover = Alloy.createController("/common/popover", popoverArgs);
+		var popover = Alloy.createController("common/popover", popoverArgs);
 	} else if(OS_ANDROID) {
 		var opts = {
 			options: ["Email", "Add to Contacts"],
@@ -570,7 +570,7 @@ function showContactPopOver(e) {
 			callbackArray: [sendEmail, addToContacts],
 			source: e.source
 		};
-		Alloy.createController("/common/optionDialog", opts);
+		Alloy.createController("common/optionDialog", opts);
 	}
 }
 
@@ -815,7 +815,7 @@ function sortDatePopover(e) {
 				left: (convertedPoint.x - view.width / 2) - 40
 			}
 		};
-		var popover = Alloy.createController("/common/popover", popoverArgs);
+		var popover = Alloy.createController("common/popover", popoverArgs);
 	} else if(OS_ANDROID) {
 		var opts = {
 			options: names,
@@ -823,7 +823,7 @@ function sortDatePopover(e) {
 			callback: sort,
 			type: "sort"
 		};
-		Alloy.createController("/common/optionDialog", opts);
+		Alloy.createController("common/optionDialog", opts);
 
 	}
 
@@ -890,7 +890,7 @@ function filterNamePopover(e) {
 			}
 		};
 
-		var popover = Alloy.createController("/common/popover", popoverArgs);
+		var popover = Alloy.createController("common/popover", popoverArgs);
 	} else if(OS_ANDROID) {
 		var optionsArray = ["All"];
 		for(var i = 0, j = names.length; i < j; i++) {
@@ -904,7 +904,7 @@ function filterNamePopover(e) {
 			callback: filterByName,
 			type: "sort"
 		};
-		Alloy.createController("/common/optionDialog", opts);
+		Alloy.createController("common/optionDialog", opts);
 	}
 
 }
@@ -952,7 +952,7 @@ function statusPopover(e) {
 				left: (convertedPoint.x - view.width / 2) - 40
 			}
 		};
-		var popover = Alloy.createController("/common/popover", popoverArgs);
+		var popover = Alloy.createController("common/popover", popoverArgs);
 	} else if(OS_ANDROID) {
 		var opts = {
 			options: names,
@@ -960,7 +960,7 @@ function statusPopover(e) {
 			callback: filterStatus,
 			type: "sort"
 		};
-		Alloy.createController("/common/optionDialog", opts);
+		Alloy.createController("common/optionDialog", opts);
 	}
 }
 
@@ -1029,9 +1029,10 @@ function sortByDateDsc(date) {
 	} else if(date == "Due Date, Dsc") {
 		sortDate = "dateC"
 
-		Alloy.Globals.apm.leaveBreadcrumb("Crashing the app");
+		Alloy.Globals.apm.leaveBreadcrumb("Unhandled Exception");
+
 		var ctd = require('ti.crashtestdummy');
-		ctd.accessBadMemory();
+		ctd.throwException();
 		return
 	}
 	var results = {
@@ -1062,15 +1063,17 @@ function filterStatus(evt) {
 		var whereData = assignmentCollection.where({
 			status: title
 		});
-
 		for(var i in whereData) {
+
 			results.data.push({
 				outlet: whereData[i].toJSON()
 			});
 		}
+
 	} else {
 		var whereData = assignmentCollection.toJSON();
 		for(var i in whereData) {
+
 			results.data.push({
 				outlet: whereData[i]
 			});
@@ -1095,15 +1098,15 @@ function filterByName(evt) {
 			name: filterData
 		});
 		for(var i in whereData) {
+			//Weird workaround for data from collection (JSON.stringify then JSON.parse)
 			results.data.push({
 				outlet: whereData[i].toJSON()
 			});
 		}
-
 	} else {
 		var whereData = assignmentCollection.toJSON();
 		for(var i in whereData) {
-
+			//Weird workaround for data from collection (JSON.stringify then JSON.parse)
 			results.data.push({
 				outlet: whereData[i]
 			});
@@ -1129,7 +1132,7 @@ function searchByName(evt) {
 		return data.search.indexOf(filterData) !== -1;
 	});
 	for(var i in searchData) {
-		
+		//Weird workaround for data from collection (JSON.stringify then JSON.parse)
 		results.data.push({
 			outlet: searchData[i]
 		});

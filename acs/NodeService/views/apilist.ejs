@@ -1,0 +1,323 @@
+<% include header %>
+<div class="container wrapper">
+    <div class="row">
+    
+<!--   <span class="label label-warning">Processing</span>  -->
+<!--   <span class="label label-important">Due</span>  --> 
+<!--   <span class="badge badge-success">Active</span>  -->
+<!--   <span class="label label-warning">Processing</span>  -->
+   
+        <div class="row">
+            <br><br>
+            <div class="span11 content" style="margin-left:72px;border:0px solid red;">
+                    <div class="banner">
+                    
+                        <h2>List of API Endpoints</h2>
+            		</div>
+            		
+            		<!-- start content -->
+                    <h3>/api/outlets</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                 
+                                <th width="80" >Method</th>
+                                <th width="100">Description</th>
+                                
+ 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>                             
+                                <td><p>GET</p>
+                                <span class="badge badge-success">Active</span> </td>
+                                <td class="optional">
+                                	/api/outlets  ( Pull a list of all outlets in the system )
+ 
+<pre>{
+  "result": (boolean) true|false,
+  "data": (array) [],
+  "page": (int)1,
+  "count": (int)1
+}</pre>
+
+<br />
+Here is a sample of the fields in the data array
+<pre>
+    {
+      "name": "Marty's Liquor Store",
+      "address": "1747 Washington Street",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02118",
+      "latitude": 42.336632,
+      "longitude": -71.076874,
+      "contactName": "John Bloom",
+      "contactPhone": "(617) 247-4712",
+      "oid": 1,
+      "id": "5166fc333aaf9b4d2300099f"
+    }
+</pre>                         
+                                </td>
+ 								 
+                            </tr>
+                            <tr>                                
+                                <td><p>POST</p><span class="label label-warning">Processing</span></td>
+                                <td class="optional"></td>
+                                
+                            </tr>  
+                            <tr>                                
+                                <td><p>PUT</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+  
+                            </tr>   
+                            <tr>                                
+                                <td><p>DELETE</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+                                
+                            </tr>                                           
+                        </tbody></table>
+                        
+ 
+ 
+                     <h3>/api/assignments</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                 
+                                <th width="80" >Method</th>
+                                <th  >Description</th>
+ 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>                             
+                                <td><p>GET</p><span class="badge badge-success">Active</span> </td>
+                                <td class="optional">
+                                	  /api/assignments/:userid <br />
+                                	  Returns a list of outlets for a specific user
+            
+                                
+<pre>{
+  "result": (boolean) true|false,
+  "data": (array) [],
+  "page": (int)1,
+  "count": (int)1
+}</pre>
+
+<br />
+Here is a sample of the fields in the data array
+<pre>
+    {
+      "name": "Marty's Liquor Store",
+      "address": "1747 Washington Street",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02118",
+      "latitude": 42.336632,
+      "longitude": -71.076874,
+      "contactName": "John Bloom",
+      "contactPhone": "(617) 247-4712",
+      "oid": 1,
+      "id": "5166fc333aaf9b4d2300099f"
+    }
+</pre>
+                                </td>
+ 						 
+                            </tr>
+                            <tr>                                
+                                <td><p>POST</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+ 
+                            </tr>  
+                            <tr>                                
+                                <td><p>PUT</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+ 
+                            </tr>   
+                            <tr>                                
+                                <td><p>DELETE</p> <span class="label label-warning">Processing</span></td>
+                                <td class="optional"></td>
+ 
+                            </tr>                                           
+                        </tbody></table>
+                        
+                        
+                     <h3>/api/tasks</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                 
+                                <th width="80" >Method</th>
+                                <th class="optional">Description</th>
+ 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>                             
+                                <td><p>GET</p><span class="badge badge-success">Active</span> </td>
+                                <td class="optional">
+                                	/api/tasks/:assignmentID
+                                </td>
+    
+                            </tr>
+                            <tr>                                
+                                <td><p>POST</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+ 
+                            </tr>  
+                            <tr>                                
+                                <td><p>PUT</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+ 
+                            </tr>   
+                            <tr>                                
+                                <td><p>DELETE</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+ 
+                            </tr>                                           
+                        </tbody></table>
+                        
+                      
+                     <h3>/api/expenses</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                 
+                                <th width="80" >Method</th>
+                                <th class="optional">Description</th>
+ 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>                             
+                                <td><p>GET</p><span class="badge badge-success">Active</span> </td>
+                                <td class="optional">
+                                	/api/expenses/:assignmentID
+                                
+                                </td>
+ 
+                            </tr>
+                            <tr>                                
+                                <td><p>POST</p> <span class="label label-warning">Processing</span></td>
+                                <td class="optional"></td>
+ 
+                            </tr>  
+                            <tr>                                
+                                <td><p>PUT</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+   
+                            </tr>   
+                            <tr>                                
+                                <td><p>DELETE</p><span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+  
+                            </tr>                                           
+                        </tbody></table>  
+
+                     <h3>/api/files</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                 
+                                <th width="80" >Method</th>
+                                <th class="optional">Description</th>
+ 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>                             
+                                <td><p>GET</p> <span class="badge badge-success">Active</span></td>
+                                <td class="optional"></td>
+ 
+                            </tr>
+                            <tr>                                
+                                <td><p>POST</p> <span class="label label-warning">Processing</span></td>
+                                <td class="optional"></td>
+ 
+                            </tr>  
+                            <tr>                                
+                                <td><p>PUT</p> <span class="label label-warning">Processing</span></td>
+                                <td class="optional"></td>
+ 
+                            </tr>   
+                            <tr>                                
+                                <td><p>DELETE</p> <span class="label label-warning">Processing</span></td>
+                                <td class="optional"></td>
+ 
+                            </tr>                                           
+                        </tbody></table>                          
+
+                     <h3>/api/catalog</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                 
+                                <th width="80" >Method</th>
+                                 
+                                <th class="optional">Description</th>
+ 
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>                             
+                                <td><p>GET</p>   <span class="badge badge-success">Active</span> </td>
+      
+                                <td class="optional">
+                                Endpoint: 	/api/catalog
+<pre>
+{
+  "result": true | false,
+  "data": [
+    {
+      "id": "5166fe6e310fa82fb100115c",
+      "sku": "FFC4C3D5C2",
+      "name": "Fuzzy Fiz Cola - 6 pack",
+      "description": "Makes your tummy feel all bubbly - 0 calories!",
+      "status": "IN_STOCK"
+    }
+  ],
+  "page": (int) 1,
+  "count": (int) 1
+}
+</pre>
+                                </td>
+ 								 
+                            </tr>
+                            <tr>                                
+                                <td><p>POST</p> <span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+                                
+ 								 
+                            </tr>  
+                            <tr>                                
+                                <td><p>PUT</p> <span class="label label-warning">Processing</span></td>
+                                <td class="optional"></td>
+                                 
+ 								 
+                            </tr>   
+                            <tr>                                
+                                <td><p>DELETE</p> <span class="label label-warning">Processing</span> </td>
+                                <td class="optional"></td>
+                                
+ 								 
+                            </tr>                                           
+                        </tbody></table>                         
+                        
+                                                             
+                    <!-- end content -->                 
+                    </div>
+            </div>
+        </div>
+
+    
+    </div><!--/row-->
+    
+    <hr>
+
+    <footer>
+        <!-- <p>&copy; Appcelerator, Inc 2013</p> -->
+    </footer>
+    
+</div> <!-- /container wrapper -->

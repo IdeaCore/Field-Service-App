@@ -17,21 +17,50 @@ function login(params) {
 			opacity: 0.0
 		});
 	}
-	Alloy.Globals.MainWindow.add(Alloy.Globals.Login.getView());
 	Alloy.Globals.Login.init({
 		loginCallback: initHome
 	});
+
+	if(Alloy.CFG.skipLogin) {
+		Alloy.Globals.Login.loginClick();
+	} else {
+		Alloy.Globals.MainWindow.add(Alloy.Globals.Login.getView());
+	}
+
 }
 
 //Initialize the home screen on successful login
 function initHome(user) {
-	var api = require("fieldServiceApi");
-	api.setAuth({
-		userID: user.id,
-		user: user
-	});
 
-	Alloy.Globals.MyOutlets = Alloy.createController("/my-service-outlets/myServiceOutlets");
+	if(user) {
+		var api = require("fieldServiceApi");
+		api.setAuth({
+			userID: user.id,
+			user: user
+		});
+
+		Alloy.Globals.MyOutlets = Alloy.createController("my-service-outlets/myServiceOutlets");
+	} else {
+		var alertDialog = Ti.UI.createAlertDialog({
+			title: "Login Failure",
+			message: "Would you like to generate a demo user?",
+			buttonNames: ["Yes", "No"]
+		});
+		alertDialog.show();
+		alertDialog.addEventListener("click", function(evt) {
+			if(evt.index == 0) {
+				var setup = require("/data/setup");
+				setup.loadData();
+
+			} else if(evt.index == 1) {
+				if(Alloy.CFG.skipLogin) {
+					Alloy.Globals.MainWindow.add(Alloy.Globals.Login.getView());
+					Alloy.Globals.Login.open();
+
+				}
+			}
+		});
+	}
 }
 
 //Logout, destroy home screen and display login
@@ -76,3 +105,4 @@ function logout() {
 //Exported functions
 $.logout = logout;
 $.initHome = initHome;
+

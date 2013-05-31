@@ -10,7 +10,7 @@ index = _args.index || 0,
 $.totalTime.removeStartStop();
 $.totalTime.widget.addEventListener("click", showTimePicker);
 
-if(_args.existing === false && !_args.data.tasks[index]) {
+if(_args.existing === false) {
 	index = _args.data.tasks.length;
 	_args.data.tasks[index] = {
 		notes: "",
@@ -39,10 +39,11 @@ if(_taskData) {
 
 $.updateTask = function(_callback) {
 	if(_args.existing) {
+
 		api.updateTask({
-			type: $.txtType.value,
-			duration: $.totalTime.getTime(),
-			notes: $.txtComments.value,
+			type: $.txtType.value || null,
+			duration: $.totalTime.getTime() || null,
+			notes: $.txtComments.value || null,
 			status: _taskData.status || 'None',
 			id: _taskData.id,
 			onload: function(e) {
@@ -59,7 +60,7 @@ $.updateTask = function(_callback) {
 			type: $.txtType.value || "Test",
 			duration: $.totalTime.getTime(),
 			notes: $.txtComments.value || "Test",
-			status: "Test",
+			status: "Inactive",
 			aid: _args.data.outlet.aid,
 			onload: function(e) {
 				console.log("Task Added - " + JSON.stringify(e));
@@ -71,7 +72,7 @@ $.updateTask = function(_callback) {
 				console.log("Error:" + e);
 				Ti.UI.createAlertDialog({
 					title: "Field Service Demo",
-					message: "Error creating a new task"
+					message: "Error: " + e.message
 				}).show();
 			}
 		});
@@ -234,7 +235,7 @@ function showTimePicker(e) {
 			top: convertedPoint.y
 		}
 	};
-	var popover = Alloy.createController("/common/popover", popoverArgs);
+	var popover = Alloy.createController("common/popover", popoverArgs);
 	var readableTime = $.totalTime.getTime("text");
 	readableTime = readableTime.split(":");
 	timePicker.setSelectedRow(0, parseInt(readableTime[0], 10), false);
@@ -267,7 +268,7 @@ function buildDocuments(_documents) {
 }
 
 function showProducts(e) {
-	var productsList = Alloy.createController("/service-outlet-detail/productsList", {
+	var productsList = Alloy.createController("service-outlet-detail/productsList", {
 		data: _args.data.products,
 		type: "taskDetail",
 		callback: function(selectedProduct) {
@@ -298,11 +299,36 @@ function showProducts(e) {
 			bottom: 720 - convertedPoint.y
 		}
 	};
-	var popover = Alloy.createController("/common/popover", popoverArgs);
+	var popover = Alloy.createController("common/popover", popoverArgs);
+}
+
+function showTypes(evt) {
+	var view = Ti.UI.createView({
+		width: 200,
+		height: 157
+	});
+	view.add(Alloy.Globals.MyOutlets.createPopOverButton("Stock", 0));
+	view.add(Alloy.Globals.MyOutlets.createPopOverButton("Break", 49));
+	view.add(Alloy.Globals.MyOutlets.createPopOverButton("Travel", 98));
+	var popoverArgs = {
+		arrowPosition: "top",
+		view: view,
+		containerLayout: {
+			right: 160,
+			top: 230
+		}
+	};
+	var popover = Alloy.createController("common/popover", popoverArgs);
+	view.addEventListener("click", function(e) {
+		if(e.source.title) {
+			$.txtType.value = e.source.title;
+		}
+	});
+
 }
 
 function showExpenses(e) {
-	var expensesList = Alloy.createController("/service-outlet-detail/productsList", {
+	var expensesList = Alloy.createController("service-outlet-detail/productsList", {
 		data: _args.data.expenses,
 		type: "taskDetail",
 		callback: function(selectedExpense) {
@@ -333,11 +359,11 @@ function showExpenses(e) {
 			bottom: 720 - convertedPoint.y
 		}
 	};
-	var popover = Alloy.createController("/common/popover", popoverArgs);
+	var popover = Alloy.createController("common/popover", popoverArgs);
 }
 
 function showDocuments(e) {
-	var documentsList = Alloy.createController("productsList", {
+	var documentsList = Alloy.createController("service-outlet-detail/productsList", {
 		data: _args.data.documents,
 		type: "taskDetail",
 		callback: function(selectedDocument) {
@@ -368,7 +394,7 @@ function showDocuments(e) {
 			bottom: 720 - convertedPoint.y
 		}
 	};
-	var popover = Alloy.createController("/common/popover", popoverArgs);
+	var popover = Alloy.createController("common/popover", popoverArgs);
 }
 
 function deleteProducts(e) {

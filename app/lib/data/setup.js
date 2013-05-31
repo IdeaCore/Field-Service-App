@@ -1,68 +1,71 @@
-var ACS = require("ti.cloud"),assignments = require("/data/assignments"),outlets = require("/data/outlets"),catalog = require("/data/catalog");
+var ACS = require("ti.cloud"),
+	assignments = require("/data/assignments"),
+	outlets = require("/data/outlets"),
+	catalog = require("/data/catalog");
 var loading = Alloy.createWidget("com.appcelerator.loading");
 
-function loadData(){
-	
-	if(OS_IOS){
-		
+function loadData() {
+
+	if(OS_IOS) {
+
 		var emailDialog = Ti.UI.createAlertDialog({
-			title:"Enter Email",
+			title: "Enter Email",
 			message: "Add your email for password recovery.",
-			buttonNames:["Add","Skip"],
+			buttonNames: ["Add", "Skip"],
 			style: Titanium.UI.iPhone.AlertDialogStyle.PLAIN_TEXT_INPUT
 		});
-		
+
 		emailDialog.show();
-		
-		emailDialog.addEventListener("click", function(e){
-			if(e.index == 0 && e.text){
+
+		emailDialog.addEventListener("click", function(e) {
+			if(e.index == 0 && e.text) {
 				email = e.text;
 				createUser(email);
 			} else {
 				createUser();
 			}
-			
+
 		})
 	} else {
 		createUser();
 	}
 }
 
-function createUser(email){
-
+function createUser(email) {
 	loading.show();
 	ACS.Users.create({
-		username:"field_service_rep",
-    	password:"Titanium123!",
-    	email:email || null,
-    	password_confirmation: "Titanium123!",
-    	first_name:"Demo User",
-    	photo:Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,"/top-nav/appc-logo.png").read()
+		username: Alloy.CFG.defaults.username,
+		password: Alloy.CFG.defaults.password,
+		email: email || null,
+		password_confirmation: Alloy.CFG.defaults.password,
+		first_name: "Demo User",
+		photo: Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "/top-nav/appc-logo.png").read()
 	}, function(e) {
-		if(e.success ==1){
-			for(var i in assignments.data){
-				
+		if(e.success == 1) {
+			for(var i in assignments.data) {
+
 				assignments.data[i].userID = e.users[0].id
 			}
 			createOutlets(e.users[0].id);
 			ACS.KeyValues.set({
-			    name: 'API',
-			    value: 'ACS'
-			}, function (e) {
-			    
+				name: 'API',
+				value: 'ACS'
+			}, function(e) {
+
 			});
+
 		} else {
 			loading.hide();
 			alert(e.message);
 		}
 	});
 }
-	
-function createOutlets(userID){
-	
+
+function createOutlets(userID) {
+
 	var count = 0;
-	if (outlets.data && outlets.data.length > 0) {
-		for (i = 0; i < outlets.data.length; i++) {
+	if(outlets.data && outlets.data.length > 0) {
+		for(i = 0; i < outlets.data.length; i++) {
 			ACS.Objects.create({
 				classname: 'outlets',
 				user_id: userID,
@@ -82,29 +85,29 @@ function createOutlets(userID){
 					status: outlets.data[i].status,
 					oid: outlets.data[i].oid
 				}
-				
+
 			}, function(e) {
-				if(e.success ==1){
+				if(e.success == 1) {
 					assignments.data[count].outlet_id = e.outlets[0].id;
 					count++
-					if(count == outlets.data.length){
+					if(count == outlets.data.length) {
 						createCatalog(userID);
 					}
 				} else {
 					loading.hide();
 					alert(e.message);
 				}
-				
+
 			});
-		} 	
+		}
 	}
 }
 
-function createCatalog(userID){
-	
+function createCatalog(userID) {
+
 	var count = 0;
-	if (catalog.data && catalog.data.length > 0) {
-		for (i = 0; i < catalog.data.length; i++) {
+	if(catalog.data && catalog.data.length > 0) {
+		for(i = 0; i < catalog.data.length; i++) {
 			ACS.Objects.create({
 				classname: 'catalog',
 				user_id: userID,
@@ -116,9 +119,9 @@ function createCatalog(userID){
 				}
 
 			}, function(e) {
-				if(e.success ==1){
+				if(e.success == 1) {
 					count++;
-					if(i == catalog.data.length){
+					if(i == catalog.data.length) {
 						createAssignments(userID);
 					}
 				} else {
@@ -130,10 +133,10 @@ function createCatalog(userID){
 	}
 }
 
-function createAssignments(userID){
+function createAssignments(userID) {
 	var count = 0;
-	if (assignments && assignments.data.length > 0) {
-		for (i = 0; i < assignments.data.length; i++) {
+	if(assignments && assignments.data.length > 0) {
+		for(i = 0; i < assignments.data.length; i++) {
 			ACS.Objects.create({
 				classname: 'assignment',
 				user_id: userID,
@@ -148,11 +151,18 @@ function createAssignments(userID){
 					status: assignments.data[i].status
 				}
 			}, function(e) {
-				if(e.success ==1){
+				if(e.success == 1) {
 					count++;
-					if(count == assignments.data.length-1){
+					if(count == assignments.data.length - 1) {
 						loading.hide();
-						alert("A demo user and demo data has been created.\n\nusername: field_service_rep\npassword: Titanium123!\n\nThis data is hard coded so you can login with blank fields.");
+
+						var alertDialog = Ti.UI.createAlertDialog({
+							message: "A demo user and demo data has been created.\n\nThis data is hard coded so you can login with blank fields.\n\nYou are being logged in now...",
+							title: "Auto Login..."
+						}).show();
+
+						Alloy.Globals.Login.loginClick();
+
 					}
 				} else {
 					loading.hide();
@@ -163,4 +173,4 @@ function createAssignments(userID){
 	}
 }
 
-exports.createUser = loadData;
+exports.loadData = loadData;

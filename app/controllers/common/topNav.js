@@ -9,8 +9,13 @@ if(_args.screen && _args.screen === "detail") {
 	$.dividerDetail2 = $.btnAdd = $.btnCamera = $.dividerDetail3 = null;
 }
 
-$.userImage.image = api.getUser().photo && api.getUser().photo.urls.small_240 || null;
-$.userName.text = api.getUser().first_name;
+var user = api.getUser();
+
+if(user.photo && user.photo.urls && user.photo.urls.small_240) {
+	$.userImage.image = user.photo.urls.small_240;
+}
+
+$.userName.text = user.first_name;
 
 function profileClick(e) {
 	var logoutBtn = Ti.UI.createButton({
@@ -38,7 +43,7 @@ function profileClick(e) {
 		}
 	};
 
-	var popover = Alloy.createController("/common/popover", popoverArgs);
+	var popover = Alloy.createController("common/popover", popoverArgs);
 
 	logoutBtn.addEventListener("click", Alloy.Globals.MainController.logout);
 
@@ -49,4 +54,8 @@ function infoClick() {
 		title: "Field Service Demo Info",
 		message: "This is a demonstration app developed by Appcelerator, Inc."
 	}).show();
+}
+
+function openDashboard() {
+	Ti.Platform.openURL(Alloy.CFG.defaults.nodeUrl);
 }

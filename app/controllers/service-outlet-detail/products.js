@@ -83,7 +83,7 @@ function createRow(_rowData) {
 }
 
 function openProductDetail(e) {
-	var productDetail = Alloy.createController("/service-outlet-detail/productDetail", {
+	var productDetail = Alloy.createController("service-outlet-detail/productDetail", {
 		data: _data.products[e.index],
 		existing: true
 	});
@@ -153,7 +153,7 @@ function openProductDetail(e) {
 
 //Add button function
 function addProduct(e) {
-	var productDetail = Alloy.createController("/service-outlet-detail/productDetail", {
+	var productDetail = Alloy.createController("service-outlet-detail/productDetail", {
 		aid: _data.outlet.aid,
 		existing: false
 	});

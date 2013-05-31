@@ -1,5 +1,12 @@
 {
-    "global": {},
+    "global": {
+    	"skipLogin": false,
+    	"defaults":{
+    		"username":"field_service_rep",
+    		"password":"Titanium123!",
+    		"nodeUrl":"[REPLACE WITH YOUR NODE.ACS ENDPOINT]"
+    	}
+    },
     "env:development": {},
     "env:test": {},
     "env:production": {},

@@ -1,7 +1,43 @@
-Welcome to your Appcelerator Titanium Mobile Project
+Welcome to the Field Services Demo App for the new Appcelerator Platform
+========================================================================
 
-----------------------------------
+To get this app up and running, do the following steps once imported via Appcelerator Studio
+--------------------------------------------------------------------------------------------
 
+	1.  Open the tiapp.xml file.
+	
+	2.  Open the acs/NodeService/package.json file.
+	
+	3.  In tiapp.xml, highlight and copy the <guid> value.
+	
+	4.  In the package.json file replace the "name" value with the copied guid value.
+	
+	5.  In the tiapp.xml, highlight and copy the <acs-api-key-development> value.
+	
+	6.  In the package.json file replace the "appkey" value with the copied acs-api-key-development value.
+	
+	7.  Right click on the NodeService directory, click on Show In, then click on Terminal
+	
+	8.  In Terminal type "acs publish --force"
+	
+	9.  In Terminal, copy the published url ("App will be available at...")
+	
+	10. Open app/config.json and paste the url for the "nodeUrl" value.
+	
+	11. Build the application for iPad simulator or device
+	
+
+Included features for Performance Management Testing
+----------------------------------------------------
+
+	1. Crash - Longpress the active outlet status button, should say 'Active', then click 'Cancel' ...crash. 
+	
+	2. Handled Exception - Click on the Sort option to sort the outlets by date, then select 'Due Date - Asc'. A handled exception will be logged. 
+	
+	3. Unhandled Exception - Click on the Sort option to sort the outlets by date, then select 'Due Date - Dsc'. An unhandled Exception will be logged and the app will crash. (this one may need to change to not crash)
+
+
+=================================
 Stuff our legal folk make us say:
 
 Appcelerator, Appcelerator Titanium and associated marks and logos are 

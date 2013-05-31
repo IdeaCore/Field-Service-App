@@ -1,9 +1,9 @@
 <Alloy>
 	<Collection src="assignments"/>
 	<View class="container" id="container">
-		<Require src="/common/topNav" id="topNav" screen="myServiceOutlets"/>
+		<Require src="common/topNav" id="topNav" screen="myServiceOutlets"/>
 		<View id="activeOutletContainer">
-			<Require src="/my-service-outlets/activeOutlet" id="myActiveOutlet"/>
+			<Require src="my-service-outlets/activeOutlet" id="myActiveOutlet"/>
 		</View>
 		<View id="myOutletsContainer">
 			<View id="toolbar">

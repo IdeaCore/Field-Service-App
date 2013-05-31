@@ -1,10 +1,10 @@
 <Alloy>
 	<View id="wrapper">
 		<ScrollView id="scrollContainer">
-			<View class="view_container" id="typeContainer">
+			<View class="view_container" id="typeContainer"  onClick="showTypes">
 				<Label class="label_title">Type</Label>
 				<!-- <Label id="lblTypeValue" /> -->
-				<TextField id="txtType" />
+				<TextField id="txtType"/>
 				<View class="rightArrow" />
 			</View>
 			<View class="view_container" id="timeContainer">

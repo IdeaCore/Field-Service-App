@@ -1,6 +1,6 @@
 <Alloy>
 	<View class="container" id="wrapper">
-		<Require src="/common/topNav" id="topNav" screen="detail"/>
+		<Require src="common/topNav" id="topNav" screen="detail"/>
 		<View id="infoBar">
 			<View id="outlet_location_info">
 				<Button id="btnLocation" onClick="mapClick"/>
@@ -14,7 +14,7 @@
 			</View>
 			<Widget src="com.appcelerator.globalTimer" id="timer"/>
 		</View>
-		<Require src="/service-outlet-detail/itemHeader" id="header" title=""/>
+		<Require src="service-outlet-detail/itemHeader" id="header" title=""/>
 	  	<View id="detailContainer">
 		    <Button id="leftBtn" class="navBtn" onClick="navClick"/>
 		    <Button id="rightBtn" class="navBtn" onClick="navClick"/>

@@ -32,16 +32,18 @@ $.updateProduct = function(_callback) {
 				id: _args.id,
 				aid: _args.aid,
 				onload: function(e) {
-					console.log("Product Created - " + e.id);
+					console.log("Product Created - " + e.id + "with" + _args.id);
+					console.log(e);
+					var customData = e["[CUSTOM_catalog]catalog_id"] || e["[custom_catalog]catalog_id"] || {};
 					_callback && _callback({
 						id: e.id,
 						quantity: e.quantity,
-						productName: e["[CUSTOM_catalog]catalog_id"][0].name,
-						productDescription: e["[CUSTOM_catalog]catalog_id"][0].description,
-						productStatus: e["[CUSTOM_catalog]catalog_id"][0].status,
+						productName: customData[0] ? customData[0].name : null,
+						productDescription: customData[0] ? customData[0].description : null,
+						productStatus: customData[0] ? customData[0].status : null,
 						cid: e.cid,
 						aid: e.aid,
-						productCID: e["[CUSTOM_catalog]catalog_id"][0].cid
+						productCID: customData[0] ? customData[0].cid : null
 					});
 				},
 				onerror: function(e) {
@@ -88,7 +90,7 @@ function setName(_productDetails) {
 }
 
 function openProductsList(e) {
-	var productsList = Alloy.createController("/service-outlet-detail/productsList", {
+	var productsList = Alloy.createController("service-outlet-detail/productsList", {
 		callback: setName
 	});
 
@@ -104,5 +106,5 @@ function openProductsList(e) {
 			top: convertedPoint.y
 		}
 	};
-	var popover = Alloy.createController("/common/popover", popoverArgs);
+	var popover = Alloy.createController("common/popover", popoverArgs);
 }

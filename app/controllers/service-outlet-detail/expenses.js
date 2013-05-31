@@ -91,7 +91,7 @@ function createRow(_rowData) {
 
 //Add button function
 function addExpense(e) {
-	var expenseDetail = Alloy.createController("/service-outlet-detail/expensesDetail", {
+	var expenseDetail = Alloy.createController("service-outlet-detail/expensesDetail", {
 		aid: _data.outlet.aid,
 		existing: false
 	});
@@ -148,7 +148,7 @@ function addExpense(e) {
 }
 
 function openDetail(e) {
-	var expenseDetail = Alloy.createController("/service-outlet-detail/expensesDetail", {
+	var expenseDetail = Alloy.createController("service-outlet-detail/expensesDetail", {
 		data: _data.expenses[e.index],
 		existing: true
 	});

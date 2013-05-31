@@ -5,7 +5,7 @@ var fieldServiceApi = (function() {
 	// | Private members.      |
 	// +-----------------------+
 
-	var urlRoot = '[REPLACE WITH YOUR NODE.ACS ENDPOINT]';
+	var urlRoot = Alloy.CFG.defaults.nodeUrl;
 	var responseType = 'json';
 	var logLevel = 'debug';
 	var publicMethods = {};
@@ -293,15 +293,15 @@ var fieldServiceApi = (function() {
 	}
 
 	publicMethods.updateTask = function(params) {
-		if(params && params.type && params.duration && params.id && params.notes && params.status) {
+		if(params && params.duration && params.id) {
 			Cloud.Objects.update({
 				classname: 'tasks',
 				id: params.id,
 				fields: {
-					type: params.type,
-					duration: params.duration,
-					notes: params.notes,
-					status: params.status
+					type: params.type || null,
+					duration: params.duration || null,
+					notes: params.notes || null,
+					status: params.status || null
 				}
 			}, function(e) {
 				if(e.success) {
@@ -576,7 +576,7 @@ var fieldServiceApi = (function() {
 
 	publicMethods.getCatalog = function(params) {
 		_http.request({
-			url: urlRoot + "catalog",
+			url: Alloy.CFG.defaults.nodeUrl,
 			timeout: 20000,
 			type: "GET",
 			format: "json",

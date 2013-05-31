@@ -1,31 +1,26 @@
 {
-	"name": "Ti.FieldService",
-	"version": "0.1.1",
-	"description": "",
-	"framework": "mvc",
-	"bodyParser": true,
-	"main": "app.js",
-	"logfile": "Ti.FieldService.log",
-	"keywords": [
+  "name": "[REPLACE WITH guid FROM tiapp.xml]",
+  "appkey": "[REPLACE WITH acs-api-key-development FROM tiapp.xml]",
+  "version": "0.1.1",
+  "description": "",
+  "framework": "mvc",
+  "bodyParser": true,
+  "main": "app.js",
+  "logfile" : "Ti.FieldService.log",
+  "keywords": [
   ],
-	"author": "",
-	"maintainers": [
+  "author": "",
+  "maintainers": [
   ],
-	"contributors": [
+  "contributors": [
   ],
-	"repository": {
-		"type": "git",
-		"url": ""
-	},
-	"preferGlobal": false,
-	"dependencies": {
-		"MD5": "1.0.3",
-		"underscore": "1.4.3",
-		"oauth": "0.9.10",
-		"guid": "0.0.10",
-		"when": "2.0.1",
-		"node-salesforce": "0.5.1"
-	},
-	"license": "",
-	"private": true
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "preferGlobal": false,
+  "dependencies": {
+  },
+  "license":"",
+  "private": true
 }

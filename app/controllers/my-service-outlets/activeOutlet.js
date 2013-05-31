@@ -106,7 +106,7 @@ function addTask(evt) {
 			top: 230
 		}
 	};
-	var popover = Alloy.createController("/common/popover", popoverArgs);
+	var popover = Alloy.createController("common/popover", popoverArgs);
 	view.addEventListener("click", function(e) {
 		if(e.source.title) {
 			e.source.aid = evt.source.aid;
@@ -144,7 +144,7 @@ function showStatusPopOver(e) {
 				file: "activeOutlet.js",
 			}
 		};
-		var popover = Alloy.createController("/common/popover", popoverArgs);
+		var popover = Alloy.createController("common/popover", popoverArgs);
 	} else if(OS_ANDROID) {
 		var opts = {
 			options: ["Active", "On Hold", "Inactive", "Complete"],
@@ -152,7 +152,7 @@ function showStatusPopOver(e) {
 			callbackArray: [null, holdClick, inactiveClick, completeClick],
 			source: e.source
 		};
-		Alloy.createController("/common/optionDialog", opts);
+		Alloy.createController("common/optionDialog", opts);
 	}
 }
 

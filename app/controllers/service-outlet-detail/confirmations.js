@@ -31,11 +31,20 @@ function deleteSignature() {
 	$.signatureLabel.show();
 }
 
+function resetProducts() {
+	$.productList.setData([]);
+	signatureView.clear();
+	alert("Order Confirmed.");
+}
+
 function getHeader() {
 	return {
 		title: "Confirmation",
 		itemCount: 0,
-		callback: null
+		rightNavButton: {
+			type: "Submit",
+			event: resetProducts
+		}
 	}
 }
 $.getHeader = getHeader;

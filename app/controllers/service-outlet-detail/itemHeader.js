@@ -41,7 +41,7 @@ $.update = function(_args) {
 		$.rightNavButton.title = "";
 
 		if(_args.rightNavButton) {
-			if(_args.rightNavButton.type === "Delete" || _args.rightNavButton.type === "Cancel") {
+			if(_args.rightNavButton.type === "Delete" || _args.rightNavButton.type === "Cancel" || _args.rightNavButton.type === "Submit") {
 				$.rightNavButton.title = _args.rightNavButton.type;
 				$.rightNavButton.backgroundImage = "/service-outlet-detail/nav-btn-right-flex.png";
 				$.rightNavButton.backgroundSelectedImage = "/service-outlet-detail/nav-btn-right-touch-flex.png";
