@@ -1,8 +1,17 @@
 /**
  * Salesforce module
  */
-
+if (typeof Alloy === 'undefined') {
+    var Alloy = require('alloy');
+}
+if (typeof Backbone === 'undefined') {
+    var Backbone = require('alloy/backbone');
+}
+if (typeof _ === 'undefined') {
+    var _ = require('alloy/underscore')._;
+}
 // Http helper
+
 var http = require('http');
 
 /**

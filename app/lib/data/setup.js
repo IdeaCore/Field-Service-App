@@ -1,3 +1,12 @@
+if (typeof Alloy === 'undefined') {
+    var Alloy = require('alloy');
+}
+if (typeof Backbone === 'undefined') {
+    var Backbone = require('alloy/backbone');
+}
+if (typeof _ === 'undefined') {
+    var _ = require('alloy/underscore')._;
+}
 var ACS = require("ti.cloud"),
 	assignments = require("/data/assignments"),
 	outlets = require("/data/outlets"),

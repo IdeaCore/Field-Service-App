@@ -16,6 +16,16 @@
  *  _params.passthrough : Any passthrough params
  *  _params.headers     : Array of request headers
  */
+if (typeof Alloy === 'undefined') {
+    var Alloy = require('alloy');
+}
+if (typeof Backbone === 'undefined') {
+    var Backbone = require('alloy/backbone');
+}
+if (typeof _ === 'undefined') {
+    var _ = require('alloy/underscore')._;
+}
+
 exports.request = function(_params) {
 	if(Ti.Network.online) {
 		// Setup the xhr object
