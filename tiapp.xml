@@ -11,8 +11,8 @@
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>
     <statusbar-style>default</statusbar-style>
-    <statusbar-hidden>false</statusbar-hidden>
-    <fullscreen>false</fullscreen>
+    <statusbar-hidden>true</statusbar-hidden>
+    <fullscreen>true</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
     <guid>11111111-1111-1111-1111-111111111111</guid>
@@ -81,6 +81,8 @@
         <module platform="commonjs">ti.cloud</module>
         <module platform="android">ti.paint</module>
         <module platform="iphone">ti.paint</module>
+        <module platform="iphone">ti.map</module>
+        <module platform="android">ti.map</module>
     </modules>
     <deployment-targets>
         <target device="tizen">false</target>
