@@ -54,13 +54,13 @@
 "#outlet_address": {
 	left: 55,
 	top: 0,
-	touchEnabled: "false",
+	touchEnabled: false,
 	color: "#303030"
 },
 "#outlet_city_state_zip": {
 	left: 55,
 	top: 23,
-	touchEnabled: "false",
+	touchEnabled: false,
 	color: "#303030"
 },
 "#outlet_contact_info": {
@@ -79,13 +79,13 @@
 "#outlet_contact_name": {
 	left: 55,
 	top: 0,
-	touchEnabled: "false",
+	touchEnabled: false,
 	color: "#303030"
 },
 "#outlet_contact_phone": {
 	left: 55,
 	top: 23,
-	touchEnabled: "false",
+	touchEnabled: false,
 	color: "#303030"
 },
 "#timer": {
