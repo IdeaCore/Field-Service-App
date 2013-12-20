@@ -161,7 +161,7 @@
 	height: 36,
 	top: 12,
 	layout: "horizontal",
-	touchEnabled: "true"
+	touchEnabled: true
 },
 "#lblStatus": {
 	left: 10
