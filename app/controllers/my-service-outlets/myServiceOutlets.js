@@ -32,7 +32,7 @@ function showLoading(message) {
 		message: message || "  Retrieving Latest Assignments...",
 		backgroundColor: "#000000",
 		color: "#ffffff",
-		style: Titanium.UI.iPhone.ActivityIndicatorStyle.BIG,
+		style: OS_IOS?Titanium.UI.iPhone.ActivityIndicatorStyle.BIG:Titanium.UI.ActivityIndicatorStyle.BIG,
 		height: Ti.UI.FILL,
 		width: Ti.UI.FILL,
 		borderRadius: 8,
