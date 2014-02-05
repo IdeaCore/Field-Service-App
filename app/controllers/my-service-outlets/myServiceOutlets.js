@@ -376,8 +376,8 @@ function openDetails(e, navData) {
 						}),
 						opacity: 0.0,
 						duration: 1000
-					});
-					setTimeout(function() {
+					}, function(){
+						hideLoading();
 						Alloy.Globals.DetailsView.getView().animate({
 							transform: Ti.UI.create2DMatrix({
 								scale: 1.0
@@ -387,7 +387,7 @@ function openDetails(e, navData) {
 						}, function() {
 							hideLoading();
 						});
-					}, 250);
+					});
 				}
 			});
 		}
