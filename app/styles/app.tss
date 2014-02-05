@@ -13,7 +13,7 @@
 	opacity: 0.05
 },
 "TableViewRow": {
-	selectedBackgroundColor: "#aaa",
+	backgroundSelectedColor: "#aaa",
 	selectedColor: "#fff"
 },
 ".vSeparator": {
