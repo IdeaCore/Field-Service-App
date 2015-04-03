@@ -15,7 +15,6 @@
     <fullscreen>true</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-    <guid></guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <iphone>
         <orientations device="iphone">
